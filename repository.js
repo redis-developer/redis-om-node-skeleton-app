@@ -1,18 +1,16 @@
 import { Client, Entity, Schema } from 'redis-om'
 
 export const client = await new Client().open()
-export const addressRepository
-export const personRepository
 
 class Person extends Entity {
-  get address() {
-    return addressRepository.fetch(this.addressId)
+  async address() {
+    return await addressRepository.fetch(this.addressId)
   }
 }
 
 class Address extends Entity {
-  get persons() {
-    return personRepository.search()
+  async persons() {
+    return await personRepository.search()
       .where('addressId').eq(this.addressId)
       .return.all()
   }
@@ -38,8 +36,8 @@ const addressSchema = new Schema(Address, {
   country: { type: 'string' }
 })
 
-personRepository = client.fetchRepository(personSchema)
-addressRepository = client.fetchRepository(addressSchema)
+export const addressRepository = client.fetchRepository(addressSchema)
+export const personRepository = client.fetchRepository(personSchema)
 
 await personRepository.createIndex()
 await addressRepository.createIndex()
