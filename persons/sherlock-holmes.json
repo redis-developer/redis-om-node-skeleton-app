@@ -2,19 +2,12 @@
   "firstName": "Sherlock",
   "lastName": "Holmes",
   "age": 53,
-  "address": {
-      "streetNumber": 221,
-      "unit": "B",
-      "streetName": "Baker Street",
-      "city": "London",
-      "state": "Greater London",
-      "postalCode": "NW1 6XE",
-      "country": "United Kingdom"
-  },
+  "verified": true,
   "location": {
     "longitude": -0.1574063,
     "latitude": 51.5177234
   },
+  "locationLastUpdated" : "2022-03-01T12:00:00.000Z",
   "skills": [
     "deduction",
     "wordle",
