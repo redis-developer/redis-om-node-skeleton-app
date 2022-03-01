@@ -1,4 +1,5 @@
 import express from 'express'
+
 import { router as personCrudRouter } from './routers/person-crud-router.js'
 import { router as personPatchRouter } from './routers/person-patch-router.js'
 import { router as personsAllRouter } from './routers/persons-all-router.js'
@@ -15,7 +16,6 @@ app.use(express.json())
 
 // bring in some routers
 app.use('/person', personCrudRouter, personPatchRouter)
-
 app.use('/persons',
   personsAllRouter, personsSearchNameRouter, personsSearchAgeRouter,
   personsSearchVerifiedRouter, personsSearchLocationRouter,

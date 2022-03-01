@@ -1,6 +1,6 @@
-import { Client, Entity, Schema } from 'redis-om'
+import { Entity, Schema } from 'redis-om'
 
-export const client = await new Client().open()
+import client from './client.js'
 
 class Person extends Entity {}
 
