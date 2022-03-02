@@ -44,7 +44,7 @@ router.post('/:id', async (req, res) => {
   person.age = req.body.age ?? null
   person.verified = req.body.verified ?? null
   person.location = req.body.location ?? null
-  person.locationLastUpdated = req.body.locationLastUpdated ?? null
+  person.locationUpdated = req.body.locationUpdated ?? null
   person.skills = req.body.skills ?? null
   person.personalStatement = req.body.personalStatement ?? null
 
