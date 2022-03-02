@@ -23,19 +23,3 @@ router.get('/all', async (req, res) => {
   /* return all Persons */
   res.send(persons)
 })
-
-// ---- FIND recently moved ----------------------------------------------------
-router.get('/moved-after/:date', async (req, res) => {
-
-  /* extract and coerce the parameters */
-  const date = new Date(req.params.date)
-
-  /* search for matching Persons */
-  const persons = await personRepository.search()
-    .where('locationLastUpdated').onOrAfter(date)
-      .return.all()
-
-  /* return the found Persons */
-  res.send(persons)
-})
-
