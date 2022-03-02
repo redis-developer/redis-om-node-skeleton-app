@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { personRepository } from '../om/person.js'
+import { personRepository } from '../../om/person.js'
 
 export const router = Router()
 
 // ---- FIND with statement matching text --------------------------------------
-router.get('/text/:text', async (req, res) => {
+router.get('/with/statement/containing/:text', async (req, res) => {
 
   /* extract and coerce the parameters */
   const text = req.params.text

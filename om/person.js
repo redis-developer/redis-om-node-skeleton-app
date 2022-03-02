@@ -10,7 +10,7 @@ const personSchema = new Schema(Person, {
   age: { type: 'number' },
   verified: { type: 'boolean' },
   location: { type: 'point' },
-  locationLastUpdated: { type: 'date' },
+  locationUpdated: { type: 'date' },
   location: { type: 'point' },
   skills: { type: 'string[]' },
   personalStatement: { type: 'text' }

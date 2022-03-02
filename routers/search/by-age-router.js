@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import { personRepository } from '../om/person.js'
+import { personRepository } from '../../om/person.js'
 
 export const router = Router()
 
-// ---- FIND of age ------------------------------------------------------------
+// ---- FIND by age ------------------------------------------------------------
 router.get('/age/:age', async (req, res) => {
 
   /* extract and coerce the parameters */
@@ -32,3 +32,4 @@ router.get('/adults', async (req, res) => {
   /* return the found Persons */
   res.send(persons)
 })
+
