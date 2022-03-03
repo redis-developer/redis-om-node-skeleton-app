@@ -36,7 +36,6 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/person_id"
                   - $ref: "#/components/schemas/person"
-
   /person/{id}:
     get:
       tags:
@@ -81,7 +80,6 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/person_id"
                   - $ref: "#/components/schemas/person"
-
     delete:
       tags: 
          - Person
@@ -98,6 +96,165 @@ paths:
               schema:
                 allOf:
                   - $ref: "#/components/schemas/person_id"
+  /person/{id}/age:
+    get:
+      tags:
+        - Age
+      description: Gets a specific person's age by ID
+      summary: Get person's age
+      operationId: fetchPersonAge
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_age"
+    delete:
+      tags: 
+         - Age
+      description: Deletes a person's age by ID
+      summary: Delete person's age
+      operationId: removePersonAge
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+  /person/{id}/age/{age}:
+    patch:
+      tags: 
+        - Age
+      description: Updates a person's age
+      summary: Update person's age
+      operationId: updatePersonAge
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/age"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_age"
+  /person/{id}/first-name:
+    get:
+      tags:
+        - Name
+      description: Gets a specific person's first name by ID
+      summary: Get person's first name
+      operationId: fetchPersonFirstName
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_first_name"
+    delete:
+      tags: 
+         - Name
+      description: Deletes a person's first name by ID
+      summary: Delete person's first name
+      operationId: removePersonFirstName
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+  /person/{id}/first-name/{first_name}:
+    patch:
+      tags: 
+        - Name
+      description: Updates a person's first name
+      summary: Update person's fisrt name
+      operationId: updatePersonFirstName
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/first_name"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_first_name"
+  /person/{id}/last-name:
+    get:
+      tags:
+        - Name
+      description: Gets a specific person's last name by ID
+      summary: Get person's last name
+      operationId: fetchPersonLastName
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_last_name"
+    delete:
+      tags: 
+         - Name
+      description: Deletes a person's last name by ID
+      summary: Delete person's last name
+      operationId: removePersonLastName
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+  /person/{id}/last-name/{last_name}:
+    patch:
+      tags: 
+        - Name
+      description: Updates a person's last name
+      summary: Update person's last name
+      operationId: updatePersonLastName
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/last_name"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_last_name"
 
 components:
   parameters:
@@ -108,11 +265,49 @@ components:
       description: The ID of the person to interact with
       schema:
         $ref: "#/components/schemas/id"
+    first_name:
+      name: first_name
+      in: path
+      required: true
+      description: The first name of a person
+      schema:
+        $ref: "#/components/schemas/first_name"
+    last_name:
+      name: last_name
+      in: path
+      required: true
+      description: The last name of a person
+      schema:
+        $ref: "#/components/schemas/last_name"
+    age:
+      name: age
+      in: path
+      required: true
+      description: The age of a person
+      schema:
+        $ref: "#/components/schemas/age"
   schemas:
     id:
       description: The ID of a person
       type: string
       example: 01FX8N39YVZRCQNAW0R5T53H5T
+
+    first_name:
+      description: The first name of a person
+      type: string
+      example: Rupert
+
+    last_name:
+      description: The last name of a person
+      type: string
+      example: Holmes
+
+    age:
+      description: The age of a person in years
+      type: integer
+      format: int32
+      example: 75
+
     geo:
       type: object
       required:
@@ -129,30 +324,54 @@ components:
           type: number
           format: float
           example: 53.259
+
     person_id:
       type: object
       properties:
         entityId:
           $ref: "#/components/schemas/id"
+
+    person_first_name:
+      type: object
+      properties:
+        firstName:
+          $ref: "#/components/schemas/first_name"
+
+    person_last_name:
+      type: object
+      properties:
+        lastName:
+          $ref: "#/components/schemas/last_name"
+
+    person_full_name:
+      type: object
+      properties:
+        firstName:
+          $ref: "#/components/schemas/first_name"
+        lastName:
+          $ref: "#/components/schemas/last_name"
+
+    person_age:
+      type: object
+      properties:
+        age:
+          $ref: "#/components/schemas/age"
+
     person:
       type: object
       properties:
         firstName:
           description: The given name of the person
-          type: string
+          $ref: "#/components/schemas/first_name"
           nullable: true
-          example: Rupert
         lastName:
           description: The surname of the person
-          type: string
+          $ref: "#/components/schemas/last_name"
           nullable: true
-          example: Holmes
         age:
           description: The age of the person in years
-          type: integer
-          format: int32
+          $ref: "#/components/schemas/age"
           nullable: true
-          example: 75
         verified:
           description: If the person has been verified
           type: boolean
