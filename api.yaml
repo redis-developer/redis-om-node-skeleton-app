@@ -1,0 +1,187 @@
+openapi: 3.0.0
+info:
+  title: Redis OM for Node.js Skeleton API
+  description: >
+    A simple sample API that shows assorted ways to use Redis OM for
+    Node.js with an Express applciation.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+  - url: https://app.example.com/v1
+
+paths:
+  /person:
+    put:
+      tags:
+        - Person
+      description: Creates a new person with the specified attributes
+      summary: Create person
+      operationId: createPerson
+      requestBody:
+        description: person
+        required: true
+        content:
+          application/json:
+            schema:
+              title: person
+              allOf:
+                - $ref: "#/components/schemas/person"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person"
+
+  /person/{id}:
+    get:
+      tags:
+        - Person
+      description: Gets a specific person by ID
+      summary: Get person
+      operationId: fetchPerson
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person"
+    post:
+      tags:
+        - Person
+      description: Updates a specific person
+      summary: Update person
+      operationId: updatePerson
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        description: person
+        required: true
+        content:
+          application/json:
+            schema:
+              title: person
+              allOf:
+                - $ref: "#/components/schemas/person"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person"
+
+    delete:
+      tags: 
+         - Person
+      description: Deletes a person by ID
+      summary: Delete person
+      operationId: removePerson
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+
+components:
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      description: The ID of the person to interact with
+      schema:
+        $ref: "#/components/schemas/id"
+  schemas:
+    id:
+      description: The ID of a person
+      type: string
+      example: 01FX8N39YVZRCQNAW0R5T53H5T
+    geo:
+      type: object
+      required:
+        - longitude
+        - latitude
+      properties:
+        longitude:
+          description: The longitudinal position on the globe
+          type: number
+          format: float
+          example: -2.518
+        latitude:
+          description: The latitudinal position on the globe
+          type: number
+          format: float
+          example: 53.259
+    person_id:
+      type: object
+      properties:
+        entityId:
+          $ref: "#/components/schemas/id"
+    person:
+      type: object
+      properties:
+        firstName:
+          description: The given name of the person
+          type: string
+          nullable: true
+          example: Rupert
+        lastName:
+          description: The surname of the person
+          type: string
+          nullable: true
+          example: Holmes
+        age:
+          description: The age of the person in years
+          type: integer
+          format: int32
+          nullable: true
+          example: 75
+        verified:
+          description: If the person has been verified
+          type: boolean
+          nullable: true
+          example: false
+        location:
+          description: The location of the person on the globe
+          $ref: "#/components/schemas/geo"
+          nullable: true
+        locationUpdated:
+          description: >
+            The date and time when the user last updated their location
+            on the globe
+          type: string
+          format: date-time
+          nullable: true
+          example: 2022-03-01T12:34:56.123Z
+        skills:
+          description: A list of skills that the person possesses
+          type: array
+          items:
+            type: string
+          nullable: true
+          example:
+            - singing
+            - songwriting
+            - playwriting
+        personalStatement:
+          description: A statement about the person
+          type: string
+          nullable: true
+          example: I like piña coladas and walks in the rain

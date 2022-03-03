@@ -59,8 +59,8 @@ router.post('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
 
   /* delete the Person with its id */
-  await repository.remove(req.params.id)
+  await personRepository.remove(req.params.id)
 
   /* return the id of the deleted person */
-  res.send({ id })
+  res.send({ id: req.params.id })
 })
