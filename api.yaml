@@ -308,7 +308,7 @@ paths:
   /person/{id}/verified:
     get:
       tags:
-        - "Verification Status"
+        - Verification Status
       description: Gets a specific person's verification status by ID
       summary: Get person's verifcation status
       operationId: fetchPersonVerificationStatus
@@ -325,7 +325,7 @@ paths:
                   - $ref: "#/components/schemas/person_verified"
     delete:
       tags: 
-         - "Verification Status"
+         - Verification Status
       description: Deletes the person's verification status by ID
       summary: Delete person's verification status
       operationId: removePersonVerificationStatus
@@ -342,7 +342,7 @@ paths:
   /person/{id}/verified/{verified}:
     patch:
       tags: 
-        - "Verification Status"
+        - Verification Status
       description: Updates the person's verification status
       summary: Update person's verification status
       operationId: updatePersonVerificationStatus
@@ -520,6 +520,200 @@ paths:
                   - $ref: "#/components/schemas/person_id"
                   - $ref: "#/components/schemas/person_statement"
 
+  /persons/all:
+    get:
+      tags:
+        - Search
+        - Person
+      description: Gets all the persons
+      summary: Get all persons
+      operationId: fetchAllPersons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/persons"
+  /persons/by/first-name/{first_name}:
+    get:
+      tags:
+        - Search
+        - Name
+      description: Gets persons by first name
+      summary: Get persons by first name
+      operationId: fetchPersonsByFirstName
+      parameters:
+        - $ref: "#/components/parameters/first_name"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/persons"
+  /persons/by/last-name/{last_name}:
+    get:
+      tags:
+        - Search
+        - Name
+      description: Gets persons by last name
+      summary: Get persons by last name
+      operationId: fetchPersonsByLastName
+      parameters:
+        - $ref: "#/components/parameters/last_name"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/persons"
+  /persons/by/full-name/{first_name}/{last_name}:
+    get:
+      tags:
+        - Search
+        - Name
+      description: Gets persons by first and last name
+      summary: Get persons by full name
+      operationId: fetchPersonsByFullName
+      parameters:
+        - $ref: "#/components/parameters/first_name"
+        - $ref: "#/components/parameters/last_name"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/persons"
+  /persons/by/age/{age}:
+    get:
+      tags:
+        - Search
+        - Age
+      description: Gets persons by their age
+      summary: Get persons by age
+      operationId: fetchPersonsByAge
+      parameters:
+        - $ref: "#/components/parameters/age"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/persons"
+  /persons/adults:
+    get:
+      tags:
+        - Search
+        - Age
+      description: Gets persons that are 18+
+      summary: Get adults
+      operationId: fetchAdultPersons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/persons"
+  /persons/verified:
+    get:
+      tags:
+        - Search
+        - Verification Status
+      description: Gets persons that are verified
+      summary: Get verified persons
+      operationId: fetchVerifiedPersons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/persons"
+  /persons/non-verified:
+    get:
+      tags:
+        - Search
+        - Verification Status
+      description: Gets persons that are *not* verified
+      summary: Get non-verified persons
+      operationId: fetchNonVerifiedPersons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/persons"
+  /persons/near/{longitude},{latitude}/radius/{radius}:
+    get:
+      tags:
+        - Search
+        - Location
+      description: Gets persons by first and last name
+      summary: Get persons by full name
+      operationId: fetchPersonsByFullName
+      parameters:
+        - $ref: "#/components/parameters/longitude"
+        - $ref: "#/components/parameters/latitude"
+        - $ref: "#/components/parameters/radius"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/persons"
+  /persons/with/skills/{skills}:
+    get:
+      tags:
+        - Search
+        - Skills
+      description: Gets persons with one of the presented skills
+      summary: Get persons with skills
+      operationId: fetchPersonsWithSkills
+      parameters:
+        - $ref: "#/components/parameters/skills"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/persons"
+  /persons/with/statement/containing/{text}:
+    get:
+      tags:
+        - Search
+        - Personal Statement
+      description: Gets persons with personal statement matching the offered text
+      summary: Get persons with words matching personal statement
+      operationId: fetchPersonsWithStatement
+      parameters:
+        - $ref: "#/components/parameters/text"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/persons"
+
 components:
   parameters:
     id:
@@ -551,7 +745,7 @@ components:
       schema:
         $ref: "#/components/schemas/age"
     verified:
-      name: age
+      name: verified
       in: path
       required: true
       description: The verification status of the person
@@ -571,6 +765,13 @@ components:
       description: The latitude status of the person
       schema:
         $ref: "#/components/schemas/coordinate"
+    radius:
+      name: radius
+      in: path
+      required: true
+      description: A radius for a location search in meters
+      schema:
+        $ref: "#/components/schemas/radius"
     skills:
       name: skills
       in: path
@@ -585,6 +786,13 @@ components:
       description: The personal statement of the person
       schema:
         $ref: "#/components/schemas/statement"
+    text:
+      name: text
+      in: path
+      required: true
+      description: Text to search for
+      schema:
+        $ref: "#/components/schemas/text"
 
   schemas:
     person_id:
@@ -592,6 +800,11 @@ components:
       properties:
         entityId:
           $ref: "#/components/schemas/id"
+
+    persons:
+      type: array
+      items:
+        $ref: "#/components/schemas/person"
 
     person:
       allOf:
@@ -700,6 +913,7 @@ components:
       type: array
       items:
         type: string
+        example: dancing
       example:
         - singing
         - songwriting
@@ -709,6 +923,11 @@ components:
       description: A statement about the person
       type: string
       example: I like piña coladas and walks in the rain
+
+    text:
+      description: Text to search for in human-readable text
+      type: string
+      example: walk
 
     geo:
       type: object
@@ -731,3 +950,9 @@ components:
       type: number
       format: float
       example: 45.678
+
+    radius:
+      description: A radius, in meters
+      type: integer
+      format: int32
+      example: 2000

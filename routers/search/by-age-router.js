@@ -4,7 +4,7 @@ import { personRepository } from '../../om/person.js'
 export const router = Router()
 
 // ---- FIND by age ------------------------------------------------------------
-router.get('/age/:age', async (req, res) => {
+router.get('/by/age/:age', async (req, res) => {
 
   /* extract and coerce the parameters */
   const age = Number(req.params.age)
