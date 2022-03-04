@@ -466,6 +466,59 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/person_id"
                   - $ref: "#/components/schemas/person_skills"
+  /person/{id}/statement:
+    get:
+      tags:
+        - "Personal Statement"
+      description: Gets a specific person's personal statement by ID
+      summary: Get person's personal statement
+      operationId: fetchPersonStatement
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_statement"
+    delete:
+      tags: 
+         - "Personal Statement"
+      description: Deletes the person's personal statement by ID
+      summary: Delete person's personal statement
+      operationId: removePersonStatement
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+  /person/{id}/statement/{statement}:
+    patch:
+      tags: 
+        - "Personal Statement"
+      description: Updates the person's personal statement
+      summary: Update person's personal statement
+      operationId: updatePersonStatement
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/statement"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_statement"
 
 components:
   parameters:
@@ -525,6 +578,13 @@ components:
       description: The set of skills the person has
       schema:
         $ref: "#/components/schemas/skills"
+    statement:
+      name: statement
+      in: path
+      required: true
+      description: The personal statement of the person
+      schema:
+        $ref: "#/components/schemas/statement"
 
   schemas:
     person_id:

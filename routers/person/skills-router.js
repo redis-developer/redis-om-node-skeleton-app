@@ -9,10 +9,10 @@ router.get('/:id/skills', async (req, res) => {
   /* extract and coerce the parameters */
   const id = req.params.id
 
-  /* fetch the Person and destructure the first name */
+  /* fetch the Person and destructure their skills */
   const { skills } = await personRepository.fetch(id)
 
-  /* return the first name */
+  /* return the skills name */
   res.send({ id, skills })
 })
 
@@ -23,7 +23,7 @@ router.patch('/:id/skills/:skills', async (req, res) => {
   const id = req.params.id
   const skills = req.params.skills.split(',')
 
-  /* update the first name */
+  /* update the skills */
   await updateSkills(id, skills)
 
   /* return the changed field */
@@ -36,7 +36,7 @@ router.delete('/:id/skills', async (req, res) => {
   /* extract and coerce the parameters */
   const id = req.params.id
 
-  /* update the first name to be null */
+  /* update the skills to be null */
   await updateSkills(id, null)
 
   /* return the id */
@@ -45,7 +45,7 @@ router.delete('/:id/skills', async (req, res) => {
 
 async function updateSkills(id, skills) {
 
-  /* fetch the Person we are updating and set the name */
+  /* fetch the Person we are updating and set their skills */
   const person = await personRepository.fetch(id)
   person.skills = skills
 
