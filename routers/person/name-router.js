@@ -132,9 +132,6 @@ async function updateFirstName(id, firstName) {
 
   /* save the changes */
   await personRepository.save(person)
-
-  /* return the id of the changed Person */
-  return id
 }
 
 async function updateLastName(id, lastName) {
@@ -145,9 +142,6 @@ async function updateLastName(id, lastName) {
 
   /* save the changes */
   await personRepository.save(person)
-
-  /* return the id of the changed Person */
-  return id
 }
 
 async function updateFullName(id, firstName, lastName) {
@@ -159,7 +153,4 @@ async function updateFullName(id, firstName, lastName) {
 
   /* save the changes */
   await personRepository.save(person)
-
-  /* return the id of the changed Person */
-  return id
 }

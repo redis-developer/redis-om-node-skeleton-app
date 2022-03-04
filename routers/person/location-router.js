@@ -59,7 +59,4 @@ async function updateLocation(id, locationUpdated, location) {
 
   /* save the changes */
   await personRepository.save(person)
-
-  /* return the id of the changed Person */
-  return id
 }

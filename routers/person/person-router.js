@@ -6,10 +6,11 @@ import { router as nameRouter } from './name-router.js'
 import { router as ageRouter } from './age-router.js'
 import { router as verifiedRouter } from './verified-router.js'
 import { router as locationRouter } from './location-router.js'
+import { router as skillsRouter } from './skills-router.js'
 
 export const router = Router()
 
-router.use('/', nameRouter, ageRouter, verifiedRouter, locationRouter)
+router.use('/', nameRouter, ageRouter, verifiedRouter, locationRouter, skillsRouter)
 
 // ---- CREATE -----------------------------------------------------------------
 router.put('/', async (req, res) => {

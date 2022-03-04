@@ -51,8 +51,5 @@ async function updateVerification(id, verified) {
 
   /* save the changes */
   await personRepository.save(person)
-
-  /* return the id of the changed Person */
-  return id
 }
 

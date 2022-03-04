@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Redis OM for Node.js Skeleton API
+  title: Redis OM and Express Skeleton API
   description: >
     A simple sample API that shows assorted ways to use Redis OM for
     Node.js with an Express applciation.
@@ -413,6 +413,59 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/person_id"
                   - $ref: "#/components/schemas/person_location"
+  /person/{id}/skills:
+    get:
+      tags:
+        - Skills
+      description: Gets a specific person's set of skills by ID
+      summary: Get person's skills
+      operationId: fetchPersonSkills
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_skills"
+    delete:
+      tags: 
+         - Skills
+      description: Deletes all of the person's skills by ID
+      summary: Delete person's skills
+      operationId: removePersonSkills
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+  /person/{id}/skills/{skills}:
+    patch:
+      tags: 
+        - Skills
+      description: Replaces the person's set of skills
+      summary: Update person's set of skills, replacing the previous
+      operationId: updatePersonSkills
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/skills"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_skills"
 
 components:
   parameters:
@@ -465,6 +518,13 @@ components:
       description: The latitude status of the person
       schema:
         $ref: "#/components/schemas/coordinate"
+    skills:
+      name: skills
+      in: path
+      required: true
+      description: The set of skills the person has
+      schema:
+        $ref: "#/components/schemas/skills"
 
   schemas:
     person_id:
