@@ -83,7 +83,7 @@ paths:
     delete:
       tags: 
          - Person
-      description: Deletes a person by ID
+      description: Deletes the person by ID
       summary: Delete person
       operationId: removePerson
       parameters:
@@ -96,59 +96,6 @@ paths:
               schema:
                 allOf:
                   - $ref: "#/components/schemas/person_id"
-  /person/{id}/age:
-    get:
-      tags:
-        - Age
-      description: Gets a specific person's age by ID
-      summary: Get person's age
-      operationId: fetchPersonAge
-      parameters:
-        - $ref: "#/components/parameters/id"
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "#/components/schemas/person_id"
-                  - $ref: "#/components/schemas/person_age"
-    delete:
-      tags: 
-         - Age
-      description: Deletes a person's age by ID
-      summary: Delete person's age
-      operationId: removePersonAge
-      parameters:
-        - $ref: "#/components/parameters/id"
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "#/components/schemas/person_id"
-  /person/{id}/age/{age}:
-    patch:
-      tags: 
-        - Age
-      description: Updates a person's age
-      summary: Update person's age
-      operationId: updatePersonAge
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/age"
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "#/components/schemas/person_id"
-                  - $ref: "#/components/schemas/person_age"
   /person/{id}/first-name:
     get:
       tags:
@@ -170,7 +117,7 @@ paths:
     delete:
       tags: 
          - Name
-      description: Deletes a person's first name by ID
+      description: Deletes the person's first name by ID
       summary: Delete person's first name
       operationId: removePersonFirstName
       parameters:
@@ -187,7 +134,7 @@ paths:
     patch:
       tags: 
         - Name
-      description: Updates a person's first name
+      description: Updates the person's first name
       summary: Update person's fisrt name
       operationId: updatePersonFirstName
       parameters:
@@ -223,7 +170,7 @@ paths:
     delete:
       tags: 
          - Name
-      description: Deletes a person's last name by ID
+      description: Deletes the person's last name by ID
       summary: Delete person's last name
       operationId: removePersonLastName
       parameters:
@@ -240,7 +187,7 @@ paths:
     patch:
       tags: 
         - Name
-      description: Updates a person's last name
+      description: Updates the person's last name
       summary: Update person's last name
       operationId: updatePersonLastName
       parameters:
@@ -255,6 +202,166 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/person_id"
                   - $ref: "#/components/schemas/person_last_name"
+  /person/{id}/full-name:
+    get:
+      tags:
+        - Name
+      description: Gets a specific person's full name by ID
+      summary: Get person's full name
+      operationId: fetchPersonFullName
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_full_name"
+    delete:
+      tags: 
+         - Name
+      description: Deletes the person's full name by ID
+      summary: Delete person's full name
+      operationId: removePersonFullName
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+  /person/{id}/full-name/{first_name}/{last_name}:
+    patch:
+      tags: 
+        - Name
+      description: Updates the person's full name
+      summary: Update person's full name
+      operationId: updatePersonFullName
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/first_name"
+        - $ref: "#/components/parameters/last_name"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_full_name"
+  /person/{id}/age:
+    get:
+      tags:
+        - Age
+      description: Gets a specific person's age by ID
+      summary: Get person's age
+      operationId: fetchPersonAge
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_age"
+    delete:
+      tags: 
+         - Age
+      description: Deletes the person's age by ID
+      summary: Delete person's age
+      operationId: removePersonAge
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+  /person/{id}/age/{age}:
+    patch:
+      tags: 
+        - Age
+      description: Updates the person's age
+      summary: Update person's age
+      operationId: updatePersonAge
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/age"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_age"
+  /person/{id}/verified:
+    get:
+      tags:
+        - "Verification Status"
+      description: Gets a specific person's verification status by ID
+      summary: Get person's verifcation status
+      operationId: fetchPersonVerificationStatus
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_verified"
+    delete:
+      tags: 
+         - "Verification Status"
+      description: Deletes the person's verification status by ID
+      summary: Delete person's verification status
+      operationId: removePersonVerificationStatus
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+  /person/{id}/verified/{verified}:
+    patch:
+      tags: 
+        - "Verification Status"
+      description: Updates the person's verification status
+      summary: Update person's verification status
+      operationId: updatePersonVerificationStatus
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/verified"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_verified"
 
 components:
   parameters:
@@ -269,44 +376,127 @@ components:
       name: first_name
       in: path
       required: true
-      description: The first name of a person
+      description: The first name of the person
       schema:
         $ref: "#/components/schemas/first_name"
     last_name:
       name: last_name
       in: path
       required: true
-      description: The last name of a person
+      description: The last name of the person
       schema:
         $ref: "#/components/schemas/last_name"
     age:
       name: age
       in: path
       required: true
-      description: The age of a person
+      description: The age of the person
       schema:
         $ref: "#/components/schemas/age"
+    verified:
+      name: age
+      in: path
+      required: true
+      description: The verification status of the person
+      schema:
+        $ref: "#/components/schemas/verified"
+
   schemas:
+    person_id:
+      type: object
+      properties:
+        entityId:
+          $ref: "#/components/schemas/id"
+
+    person:
+      allOf:
+        - $ref: "#/components/schemas/person_full_name"
+        - $ref: "#/components/schemas/person_age"
+        - $ref: "#/components/schemas/person_verified"
+        - type: object
+          properties:
+            location:
+              description: The location of the person on the globe
+              $ref: "#/components/schemas/geo"
+              nullable: true
+            locationUpdated:
+              description: >
+                The date and time when the user last updated their location
+                on the globe
+              type: string
+              format: date-time
+              nullable: true
+              example: 2022-03-01T12:34:56.123Z
+            skills:
+              description: A list of skills that the person possesses
+              type: array
+              items:
+                type: string
+              nullable: true
+              example:
+                - singing
+                - songwriting
+                - playwriting
+            personalStatement:
+              description: A statement about the person
+              type: string
+              nullable: true
+              example: I like piña coladas and walks in the rain
+
+    person_first_name:
+      type: object
+      properties:
+        firstName:
+          $ref: "#/components/schemas/first_name"
+
+    person_last_name:
+      type: object
+      properties:
+        lastName:
+          $ref: "#/components/schemas/last_name"
+
+    person_full_name:
+      allOf:
+        - $ref: "#/components/schemas/person_first_name"
+        - $ref: "#/components/schemas/person_last_name"
+
+    person_age:
+      type: object
+      properties:
+        age:
+          $ref: "#/components/schemas/age"
+
+    person_verified:
+      type: object
+      properties:
+        age:
+          $ref: "#/components/schemas/verified"
+
     id:
-      description: The ID of a person
+      description: The ID of the person
       type: string
       example: 01FX8N39YVZRCQNAW0R5T53H5T
 
     first_name:
-      description: The first name of a person
+      description: The given name of the person
       type: string
       example: Rupert
 
     last_name:
-      description: The last name of a person
+      description: The surname of the person
       type: string
       example: Holmes
 
     age:
-      description: The age of a person in years
+      description: The age of the person in years
       type: integer
       format: int32
       example: 75
+
+    verified:
+      description: If the person has been verified
+      type: boolean
+      example: false
 
     geo:
       type: object
@@ -324,83 +514,3 @@ components:
           type: number
           format: float
           example: 53.259
-
-    person_id:
-      type: object
-      properties:
-        entityId:
-          $ref: "#/components/schemas/id"
-
-    person_first_name:
-      type: object
-      properties:
-        firstName:
-          $ref: "#/components/schemas/first_name"
-
-    person_last_name:
-      type: object
-      properties:
-        lastName:
-          $ref: "#/components/schemas/last_name"
-
-    person_full_name:
-      type: object
-      properties:
-        firstName:
-          $ref: "#/components/schemas/first_name"
-        lastName:
-          $ref: "#/components/schemas/last_name"
-
-    person_age:
-      type: object
-      properties:
-        age:
-          $ref: "#/components/schemas/age"
-
-    person:
-      type: object
-      properties:
-        firstName:
-          description: The given name of the person
-          $ref: "#/components/schemas/first_name"
-          nullable: true
-        lastName:
-          description: The surname of the person
-          $ref: "#/components/schemas/last_name"
-          nullable: true
-        age:
-          description: The age of the person in years
-          $ref: "#/components/schemas/age"
-          nullable: true
-        verified:
-          description: If the person has been verified
-          type: boolean
-          nullable: true
-          example: false
-        location:
-          description: The location of the person on the globe
-          $ref: "#/components/schemas/geo"
-          nullable: true
-        locationUpdated:
-          description: >
-            The date and time when the user last updated their location
-            on the globe
-          type: string
-          format: date-time
-          nullable: true
-          example: 2022-03-01T12:34:56.123Z
-        skills:
-          description: A list of skills that the person possesses
-          type: array
-          items:
-            type: string
-          nullable: true
-          example:
-            - singing
-            - songwriting
-            - playwriting
-        personalStatement:
-          description: A statement about the person
-          type: string
-          nullable: true
-          example: I like piña coladas and walks in the rain
