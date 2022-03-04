@@ -6,10 +6,6 @@ info:
     Node.js with an Express applciation.
   version: 1.0.0
 
-servers:
-  - url: http://localhost:8080
-  - url: https://app.example.com/v1
-
 paths:
   /person:
     put:
@@ -362,6 +358,61 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/person_id"
                   - $ref: "#/components/schemas/person_verified"
+  /person/{id}/location:
+    get:
+      tags:
+        - Location
+      description: Gets a specific person's last location by ID
+      summary: Get person's location
+      operationId: fetchPersonLocation
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_location"
+    delete:
+      tags: 
+         - Location
+      description: Deletes the person's location by ID
+      summary: Delete person's location
+      operationId: removePersonLocation
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_location_updated"
+  /person/{id}/location/{longitude},{latitude}:
+    patch:
+      tags: 
+        - Location
+      description: Updates the person's location
+      summary: Update person's location
+      operationId: updatePersonLocation
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/longitude"
+        - $ref: "#/components/parameters/latitude"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/person_id"
+                  - $ref: "#/components/schemas/person_location"
 
 components:
   parameters:
@@ -400,6 +451,20 @@ components:
       description: The verification status of the person
       schema:
         $ref: "#/components/schemas/verified"
+    longitude:
+      name: longitude
+      in: path
+      required: true
+      description: The longitude status of the person
+      schema:
+        $ref: "#/components/schemas/coordinate"
+    latitude:
+      name: latitude
+      in: path
+      required: true
+      description: The latitude status of the person
+      schema:
+        $ref: "#/components/schemas/coordinate"
 
   schemas:
     person_id:
@@ -413,35 +478,14 @@ components:
         - $ref: "#/components/schemas/person_full_name"
         - $ref: "#/components/schemas/person_age"
         - $ref: "#/components/schemas/person_verified"
-        - type: object
-          properties:
-            location:
-              description: The location of the person on the globe
-              $ref: "#/components/schemas/geo"
-              nullable: true
-            locationUpdated:
-              description: >
-                The date and time when the user last updated their location
-                on the globe
-              type: string
-              format: date-time
-              nullable: true
-              example: 2022-03-01T12:34:56.123Z
-            skills:
-              description: A list of skills that the person possesses
-              type: array
-              items:
-                type: string
-              nullable: true
-              example:
-                - singing
-                - songwriting
-                - playwriting
-            personalStatement:
-              description: A statement about the person
-              type: string
-              nullable: true
-              example: I like piña coladas and walks in the rain
+        - $ref: "#/components/schemas/person_location"
+        - $ref: "#/components/schemas/person_skills"
+        - $ref: "#/components/schemas/person_statement"
+
+    person_full_name:
+      allOf:
+        - $ref: "#/components/schemas/person_first_name"
+        - $ref: "#/components/schemas/person_last_name"
 
     person_first_name:
       type: object
@@ -455,11 +499,6 @@ components:
         lastName:
           $ref: "#/components/schemas/last_name"
 
-    person_full_name:
-      allOf:
-        - $ref: "#/components/schemas/person_first_name"
-        - $ref: "#/components/schemas/person_last_name"
-
     person_age:
       type: object
       properties:
@@ -469,8 +508,34 @@ components:
     person_verified:
       type: object
       properties:
-        age:
+        verified:
           $ref: "#/components/schemas/verified"
+
+    person_location:
+      allOf:
+        - type: object
+          properties:
+            location:
+              $ref: "#/components/schemas/location"
+        - $ref: "#/components/schemas/person_location_updated"
+
+    person_location_updated:
+      type: object
+      properties:
+        locationUpdated:
+          $ref: "#/components/schemas/location_updated"
+
+    person_skills:
+      type: object
+      properties:
+        skills:
+          $ref: "#/components/schemas/skills"
+
+    person_statement:
+      type: object
+      properties:
+        personalStatement:
+          $ref: "#/components/schemas/statement"
 
     id:
       description: The ID of the person
@@ -498,6 +563,33 @@ components:
       type: boolean
       example: false
 
+    location:
+      description: The location of the person on the globe
+      $ref: "#/components/schemas/geo"
+
+    location_updated:
+      description: >
+        The date and time when the user last updated their location
+        on the globe
+      type: string
+      format: date-time
+      example: 2022-03-01T12:34:56.123Z
+
+    skills:
+      description: A list of skills that the person possesses
+      type: array
+      items:
+        type: string
+      example:
+        - singing
+        - songwriting
+        - playwriting
+
+    statement:
+      description: A statement about the person
+      type: string
+      example: I like piña coladas and walks in the rain
+
     geo:
       type: object
       required:
@@ -506,11 +598,16 @@ components:
       properties:
         longitude:
           description: The longitudinal position on the globe
-          type: number
-          format: float
+          $ref: "#/components/schemas/coordinate"
           example: -2.518
         latitude:
           description: The latitudinal position on the globe
-          type: number
-          format: float
+          $ref: "#/components/schemas/coordinate"
           example: 53.259
+
+    coordinate:
+      description: >
+        The longitudinal or latitudinal position on the globe
+      type: number
+      format: float
+      example: 45.678

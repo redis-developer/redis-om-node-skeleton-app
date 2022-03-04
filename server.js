@@ -1,5 +1,6 @@
-import express from 'express'
+import 'dotenv/config'
 
+import express from 'express'
 import swaggerUi from 'swagger-ui-express'
 import YAML from 'yamljs'
 
@@ -25,4 +26,4 @@ app.get('/', (req, res) => {
   })
 })
 
-app.listen(8080)
+app.listen(process.env.SKELETON_PORT)
