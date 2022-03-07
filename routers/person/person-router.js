@@ -18,7 +18,7 @@ router.use('/', nameRouter, ageRouter, verifiedRouter, locationRouter,
 router.put('/', async (req, res) => {
 
   /* create the Person from the request body which just
-     happens to match our Schema */
+     *happens* to match our Schema */
   const person = await personRepository.createAndSave(req.body)
 
   /* return the newly created Person */
