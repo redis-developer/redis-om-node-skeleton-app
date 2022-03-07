@@ -32,8 +32,6 @@ We're using Redis as the database so you need some Redis. And not just any old R
 
 ## Up and Running
 
-### Clone and Configure
-
 Find a nice place on your computer and clone this repo:
 
     $ git clone git@github.com:redis-developer/redis-om-node-skeleton-app.git
@@ -56,14 +54,19 @@ You have Redis and Node.js. You have the code. Everything is configured and inst
 
 And it's running! Now what?
 
+## Using the API
 
+So, the API is up. You can interact with it and explore a bit using Swagger. Just point your browser at http://localhost:8080 and start poking around.
 
-npm start
+But, without any data, it's not that inspiring. No worries, I got you. In the `persons` folder I have created several JSON files with data ready to post to the API. You can copy the content of these files and `PUT` persons if you like (and you should) but easiest way to load all of this data is to run the `load-data.sh` script:
 
-## Load Some Data
+    $ cd persons
+    $ ./load-data.sh
 
-## Check Out the API
+And just like that, you have a small set of persons to search for.
 
-http://localhost:8080 and enjoy the Swagger goodness!
+## Wrapping Up
 
-## Change Away
+And that's pretty much it. The Swagger stuff describes the API. Look in the code and see how it all works. Most of it is pretty self explanitory and where it isn't, I've placed comments to help guide you. If I haven't put any comments *and* it's not clear, feel free to reach out and ask questions. Open an issue or hop on the [Redis Discord server](https://discord.gg/redis) and ask there.
+
+Happy coding!
