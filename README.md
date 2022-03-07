@@ -46,7 +46,9 @@ You also need to install all the Node.js packages the application uses. Packages
 
 You probably know what happens next, but just in case:
 
-    $ npm install
+```bash
+npm install
+```
 
 You have Redis and Node.js. You have the code. Everything is configured and installed. Now, you should be able to run the application. So let's do that:
 
