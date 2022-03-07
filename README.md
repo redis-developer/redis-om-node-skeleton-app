@@ -2,7 +2,7 @@
 
 Do you want to build an API using Express and Redis OM but just don't have the time? Well, this repo is the repo for you! Just clone it, get some Redis, and modify to taste.
 
-What is this repo? It's a small, fully functional API written in Express that uses Redis as it's primary database and uses Redis OM as a convenient way to access that primary database. It's chock full of examples that you can learn from, modify, and use in your own applications.
+What is this repo? It's a small, fully functional API written in Express that uses Redis as its primary database and uses Redis OM as a convenient way to access that primary database. It's chock full of examples that you can learn from, modify, and use in your own applications.
 
 Did I mention that it's fully functional? Yep. So let's get this thing a-functioning!
 
@@ -36,13 +36,13 @@ Find a nice place on your computer and clone this repo:
 
     $ git clone git@github.com:redis-developer/redis-om-node-skeleton-app.git
 
-In the root of the folder there's a `sample.env` file. Copy that file to `.env` in the same place and you should be ready to go:
+In the root of the folder, there's a `sample.env` file. Copy that file to `.env` in the same place and you should be ready to go:
 
     $ cp sample.env .env
 
-This file has configuration for the Redis URL for your Redis and the port the application listens on. The defaults are `redis://localhost:6379` and `8080` and these should be just fine. But, if you want to run Redis elsewhere or you want to change the port the API listens on, feel free to mess with them.
+This file contains the configuration for the Redis URL to your Redis and the port the application listens on. The defaults are `redis://localhost:6379` and `8080` and these should be just fine. But, if you want to run Redis elsewhere or you want to change the port the API listens on, feel free to mess with them.
 
-You also need to install all the Node.js packages the application uses. Packages like Redis OM and Express. You know, the things this sample applciation is showing you how to use.
+You also need to install all the Node.js packages the application uses. Packages like Redis OM and Express. You know, the things this sample application is showing you how to use.
 
 You probably know what happens next, but just in case:
 
@@ -58,7 +58,7 @@ And it's running! Now what?
 
 So, the API is up. You can interact with it and explore a bit using Swagger. Just point your browser at http://localhost:8080 and start poking around.
 
-But, without any data, it's not that inspiring. No worries, I got you. In the `persons` folder I have created several JSON files with data ready to post to the API. You can copy the content of these files and `PUT` persons if you like (and you should) but easiest way to load all of this data is to run the `load-data.sh` script:
+But, without any data, it's not that inspiring. No worries, I got you. In the `persons` folder, I have created several JSON files with data ready to post to the API. You can copy the contents of these files and `PUT` persons if you like (and you should) but it's easier to load all of this data at once by running the `load-data.sh` script:
 
     $ cd persons
     $ ./load-data.sh
@@ -67,6 +67,6 @@ And just like that, you have a small set of persons to search for.
 
 ## Wrapping Up
 
-And that's pretty much it. The Swagger stuff describes the API. Look in the code and see how it all works. Most of it is pretty self explanitory and where it isn't, I've placed comments to help guide you. If I haven't put any comments *and* it's not clear, feel free to reach out and ask questions. Open an issue or hop on the [Redis Discord server](https://discord.gg/redis) and ask there.
+And that's pretty much it. The Swagger stuff describes the API. Look in the code and see how it all works. Most of it is pretty self-explanitory and where it isn't I've placed comments to help guide you. If I haven't put any comments *and* it's not clear, feel free to reach out. Open an issue here on GitHub or hop on the [Redis Discord server](https://discord.gg/redis) and ask there.
 
-Happy coding!
+Thanks for using my code and happy coding!
