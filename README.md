@@ -16,11 +16,15 @@ This is an Express application that uses Redis OM for Node.js. So—as you might
 
 Speaking of an `.nvmrc` file, I like to use [`nvm`](https://github.com/nvm-sh/nvm). It's a tidy way to manage various Node.js versions on my machine. And, if you use `nvm` you can just enter...
 
-    $ nvm install `cat .nvmrc`
+```bash
+nvm install `cat .nvmrc`
+```
 
 ...to install that version of Node.js and...
 
-    $ nvm use
+```bash
+nvm use
+```
 
 ...to enable it.
 
@@ -34,11 +38,15 @@ We're using Redis as the database so you need some Redis. And not just any old R
 
 Find a nice place on your computer and clone this repo:
 
-    $ git clone git@github.com:redis-developer/redis-om-node-skeleton-app.git
+```bash
+git clone git@github.com:redis-developer/redis-om-node-skeleton-app.git
+```
 
 In the root of the folder, there's a `sample.env` file. Copy that file to `.env` in the same place and you should be ready to go:
 
-    $ cp sample.env .env
+```bash
+cp sample.env .env
+```
 
 This file contains the configuration for the Redis URL to your Redis and the port the application listens on. The defaults are `redis://localhost:6379` and `8080` and these should be just fine. But, if you want to run Redis elsewhere or you want to change the port the API listens on, feel free to mess with them.
 
@@ -52,7 +60,9 @@ npm install
 
 You have Redis and Node.js. You have the code. Everything is configured and installed. Now, you should be able to run the application. So let's do that:
 
-    $ npm start
+```bash
+npm start
+```
 
 And it's running! Now what?
 
@@ -62,8 +72,10 @@ So, the API is up. You can interact with it and explore a bit using Swagger. Jus
 
 But, without any data, it's not that inspiring. No worries, I got you. In the `persons` folder, I have created several JSON files with data ready to post to the API. You can copy the contents of these files and `PUT` persons if you like (and you should) but it's easier to load all of this data at once by running the `load-data.sh` script:
 
-    $ cd persons
-    $ ./load-data.sh
+```bash
+cd persons
+./load-data.sh
+```
 
 And just like that, you have a small set of persons to search for.
 
