@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { personRepository } from '../../om/person.js'
+import { connection } from '../../om/client.js'
 
 export const router = Router()
 
@@ -30,6 +31,10 @@ router.patch('/:id/location/:lng,:lat', async (req, res) => {
   /* update the location */
   await updateLocation(id, locationUpdated, { longitude, latitude })
 
+  /* log the location update to a stream */
+  await connection.xAdd(`Person:${id}:locationHistory`, '*', {
+    event: 'changed', longitude, latitude })
+
   /* return the changed field */
   res.send({ id, locationUpdated, location: { longitude, latitude } })
 })
@@ -45,6 +50,9 @@ router.delete('/:id/location', async (req, res) => {
 
   /* update the location to be null */
   await updateLocation(id, locationUpdated, null)
+
+  /* log the location update to a stream */
+  await connection.xAdd(`Person:${id}:locationHistory`, '*', { event: 'removed' })
 
   /* return the id */
   res.send({ id , locationUpdated })
